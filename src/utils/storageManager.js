@@ -2,6 +2,9 @@ class StorageManager {
     #key = "cookie";
 
     storeCookie(cookie) {
+        if (!cookie) {
+            cookie = null;
+        }
         localStorage.setItem(this.#key, cookie);
     };
 
@@ -15,8 +18,14 @@ class StorageManager {
     clearCookie() {
         localStorage.removeItem(this.#key);
     };
+
+
+    cookieExists() {
+        const cookie = localStorage.getItem(this.#key);
+        return cookie !== null;
+    };
 };
 
 
 
-export default StorageManager;
+export default new StorageManager();
