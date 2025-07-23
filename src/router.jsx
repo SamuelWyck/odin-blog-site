@@ -1,11 +1,11 @@
-
+import HomePage from "./components/homePage.jsx";
 
 
 
 const routes = [
     {
         path: "/",
-        element: <Homepage />
+        element: <HomePage />
     }
 ];
 
