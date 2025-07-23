@@ -4,7 +4,7 @@ import StorageManager from "./storageManager.js";
 
 class APIManager {
     #apiDomain = "http://localhost:3000";
-    #storage = new StorageManager();
+    #storage = StorageManager;
 
 
     async #makeApiCall(url, options) {
@@ -54,6 +54,23 @@ class APIManager {
             method: "GET",
             headers: {
                 authorization: `Bearer ${token}`
+            }
+        };
+
+        const response = await this.#makeApiCall(url, options);
+        return response;
+    };
+
+
+    async authPost(reqBody, signup) {
+        const endPoint = (signup) ? "signup" : "login"
+        const url = `${this.#apiDomain}/auth/${endPoint}`;
+        const options = {
+            mode: "cors",
+            method: "POST",
+            body: reqBody,
+            headers: {
+                "content-type": "application/json"
             }
         };
 
