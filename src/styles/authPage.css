@@ -1,0 +1,87 @@
+.auth-modal {
+    width: fit-content;
+    height: fit-content;
+    margin: 0 auto;
+    margin-top: 5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    background-color: var(--primary-color);
+    padding: 1rem;
+    border-radius: 0 20px 0 20px;
+    box-shadow: 0px 0px 15px 3px white;
+}
+
+.auth-modal img {
+    display: block;
+    width: 50px;
+}
+
+.auth-modal .auth-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--secondary-color);
+}
+
+.auth-modal label {
+    display: block;
+    color: var(--secondary-color);
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.auth-modal input {
+    outline: none;
+    font-size: 1.2rem;
+    height: 3ch;
+    padding: 0 .2rem;
+    border: 2px solid black;
+    border-radius: 0 10px 0 10px;
+}
+
+.auth-modal form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.auth-modal form > :last-child {
+    display: flex;
+    justify-content: center;
+}
+
+.auth-modal a {
+    color: var(--text-white);
+    font-size: 1.1rem;
+}
+
+.auth-modal button {
+    outline: none;
+    background-color: var(--secondary-color);
+    border: none;
+    color: var(--text-white);
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: .5rem 1rem;
+    border-radius: 0 10px 0 10px;
+    cursor: pointer;
+    box-shadow: 0px 0px 10px -2px white;
+    will-change: transition;
+    transition: transform .2s ease-in-out;
+}
+
+.auth-modal button:hover,
+.auth-modal button:focus {
+    transform: scale(1.1);
+}
+
+.auth-modal .errors {
+    list-style: none;
+    color: var(--secondary-color);
+}
+
+.auth-modal .error {
+    word-break: break-word;
+    max-width: 28ch;
+}
