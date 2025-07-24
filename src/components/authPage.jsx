@@ -11,6 +11,8 @@ import ErrorsPartial from "./errorsPartial";
 function AuthPage({signup}) {
     const navigate = useNavigate();
     const [errors, setErrors] = useState(null);
+    const [pwd, setPwd] = useState("");
+    const [confirmPwd, setConfirmPwd] = useState("");
 
     
     if (storage.cookieExists()) {
@@ -34,6 +36,8 @@ function AuthPage({signup}) {
         console.log(res)
         if (res.errors) {
             setErrors(res.errors);
+            setPwd("");
+            setConfirmPwd("");
             return;
         }
 
@@ -42,8 +46,19 @@ function AuthPage({signup}) {
     };
 
 
-    function clearErrors() {
+    function cleanForm() {
         setErrors(null);
+        setPwd("");
+        setConfirmPwd("");
+    };
+
+
+    function handleInput(event) {
+        if (event.target.matches("#password")) {
+            setPwd(event.target.value);
+        } else {
+            setConfirmPwd(event.target.value);
+        }
     };
 
 
@@ -73,12 +88,12 @@ function AuthPage({signup}) {
         </div>
         <div>
             <label htmlFor="password">Password</label>
-            <input key={signup} type="password" name="password" id="password" required/>
+            <input value={pwd} onChange={handleInput} type="password" name="password" id="password" required/>
         </div>
         {!signup ||
         <div>
             <label htmlFor="confirm">Confirm</label>
-            <input type="password" name="confirm" id="confirm"/>
+            <input value={confirmPwd} onChange={handleInput} type="password" name="confirm" id="confirm"/>
         </div>
         }
         <div>
@@ -86,9 +101,9 @@ function AuthPage({signup}) {
         </div>
     </form>
     {(signup) ? 
-        <Link onClick={clearErrors} to="/login">Already have an account?</Link>
+        <Link onClick={cleanForm} to="/login">Already have an account?</Link>
         : 
-        <Link onClick={clearErrors} to="/signup">Dont have an account?</Link>
+        <Link onClick={cleanForm} to="/signup">Dont have an account?</Link>
     }
     </div>
     </>
