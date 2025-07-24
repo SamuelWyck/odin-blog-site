@@ -1,0 +1,55 @@
+.user-menu-btn {
+    background: none;
+    outline: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-family: "roboto", sans-serif;
+    font-size: 1.01rem;
+}
+
+.user-menu-btn:hover,
+.user-menu-btn:focus {
+    text-decoration: underline;
+    color: var(--text-white);
+}
+
+.username-span {
+    max-width: 8ch;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--text-white);
+}
+
+.menu-arrow {
+    width: 28px;
+    filter: 
+    brightness(0) 
+    saturate(100%) 
+    invert(100%) 
+    sepia(5%) 
+    saturate(303%) 
+    hue-rotate(256deg) 
+    brightness(113%) 
+    contrast(90%);
+}
+
+.rotate {
+    transform: rotate(180deg);
+}
+
+.user-menu {
+    position: absolute;
+    background-color: var(--text-white);
+    padding: 1rem;
+    top: 110%;
+    left: 42%;
+    width: max-content;
+    border-radius: 0 10px 0 10px;
+}
+
+header nav .hidden {
+    display: none;
+}
