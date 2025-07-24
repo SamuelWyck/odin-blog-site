@@ -19,7 +19,7 @@ function HomePage() {
 
     return (
         <>
-        <Header user={user}></Header>
+        <Header user={user} />
         </>
     );
 };
