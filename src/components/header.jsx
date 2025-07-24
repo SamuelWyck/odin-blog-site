@@ -1,12 +1,14 @@
 import "../styles/header.css";
 import snakeImg from "../assets/snake.png";
 import HeaderNav from "./headerNav.jsx";
+import { Link } from "react-router-dom";
 
 
 
 function Header({user}) {
     return (
     <header>
+        <Link to="/">
         <div className="banner">
             <img 
                 src={snakeImg} 
@@ -15,6 +17,7 @@ function Header({user}) {
             />
             <p className="banner-logo">Viper Blog</p>
         </div>
+        </Link>
         <HeaderNav user={user} />
     </header>
     );
