@@ -12,4 +12,5 @@ html {
   --primary-color: hsl(2, 58%, 42%);
   --secondary-color: hsl(0, 0%, 5%);
   --text-white: hsl(0, 0%, 95%);
+  --text-black: hsl(0, 0%, 5%);
 }
