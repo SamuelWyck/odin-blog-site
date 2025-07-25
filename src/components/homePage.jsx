@@ -1,4 +1,3 @@
-import "../styles/homePage.css";
 import { useEffect, useState } from "react";
 import api from "../utils/apiManager.js";
 import Header from "./header.jsx";
@@ -20,6 +19,7 @@ function HomePage() {
     return (
         <>
         <Header user={user} />
+        <PostsList posts={posts} />
         </>
     );
 };
