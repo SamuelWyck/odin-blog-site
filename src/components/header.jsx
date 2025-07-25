@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 function Header({user}) {
     return (
     <header>
-        <Link to="/">
+        <Link to="/posts">
         <div className="banner">
             <img 
                 src={snakeImg} 

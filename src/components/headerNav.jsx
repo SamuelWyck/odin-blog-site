@@ -52,7 +52,7 @@ function HeaderNav({user}) {
                 />
             </button>
             <div className={`user-menu${(hideMenu) ? " hidden" : ""}`}>
-                <Link reloadDocument to="/" onClick={handleLogout}>Log out</Link>
+                <Link reloadDocument to="/posts" onClick={handleLogout}>Log out</Link>
             </div>
         </>
     }
