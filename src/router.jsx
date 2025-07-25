@@ -1,5 +1,6 @@
 import HomePage from "./components/homePage.jsx";
 import AuthPage from "./components/authPage.jsx";
+import PostPage from "./components/postPage.jsx";
 import { Navigate } from "react-router-dom";
 
 
@@ -12,6 +13,10 @@ const routes = [
     {
         path: "/posts",
         element: <HomePage />
+    },
+    {
+        path: "/posts/:postId",
+        element: <PostPage />
     },
     {
         path: "/login",
