@@ -2,9 +2,9 @@ import "../styles/commentForm.css";
 
 
 
-function CommentForm() {
+function CommentForm({handleSubmit}) {
     return (
-        <form className="comment-form">
+        <form onSubmit={handleSubmit} className="comment-form">
             <div>
                 <textarea 
                     name="text" 
