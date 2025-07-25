@@ -1,6 +1,8 @@
+import "../styles/homePage.css";
 import { useEffect, useState } from "react";
 import api from "../utils/apiManager.js";
 import Header from "./header.jsx";
+import PostCard from "./postCard.jsx";
 
 
 
@@ -10,16 +12,30 @@ function HomePage() {
 
     useEffect(function() {
         api.getPosts().then(function(res) {
+            const postCards = getPostCards(res.posts);
             setUser(res.user);
-            setPosts(res.posts);
+            setPosts(postCards);
         });
     }, []);
+
+
+    function getPostCards(posts) {
+        const postCards = [];
+        for (let post of posts) {
+            postCards.push(<PostCard key={post.id} post={post}/>);
+        }
+        return postCards;
+    };
 
 
     return (
         <>
         <Header user={user} />
-        <PostsList posts={posts} />
+        <div className="posts-wrapper">
+        <div className="posts-list">
+            {posts}
+        </div>
+        </div>
         </>
     );
 };
