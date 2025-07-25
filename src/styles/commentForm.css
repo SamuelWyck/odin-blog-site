@@ -1,0 +1,47 @@
+.comment-form {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.comment-form div {
+    width: min(600px, 100%);
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.comment-form textarea {
+    width: 100%;
+    outline: none;
+    border: 3px solid var(--primary-color);
+    border-radius: 0 10px 0 10px;
+    height: 10ch;
+    font-family: "roboto", sans-serif;
+    font-size: 1rem;
+    padding: .5rem;
+    color: var(--text-black);
+    background-color: var(--text-white);
+}
+
+.comment-form button {
+    align-self: end;
+    background-color: var(--primary-color);
+    outline: none;
+    border: none;
+    cursor: pointer;
+    padding: .5rem 1rem;
+    font-weight: bold;
+    font-family: "roboto", sans-serif;
+    font-size: 1rem;
+    color: var(--text-white);
+    border-radius: 0 10px 0 10px;
+    box-shadow: 0px 0px 10px 0px white;
+    will-change: transform;
+    transition: transform .2s ease-in-out;
+}
+
+.comment-form button:hover,
+.comment-form button:focus {
+    transform: scale(1.1);
+}
