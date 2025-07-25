@@ -1,0 +1,87 @@
+.comment-card {
+    background-color: var(--primary-color);
+    padding: 1rem;
+    border-radius: 0 10px 0 10px;
+    width: min(600px, 100%);
+    background-color: var(--text-white);
+    border: 3px solid var(--primary-color);
+    box-shadow: 0px 0px 10px 0px white;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.comment-info {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.comment-btns {
+    display: flex;
+    gap: 1rem;
+}
+
+.editing-comment-txt, .comment-txt {
+    font-size: 1.1rem;
+    font-family: "roboto", sans-serif;
+    max-width: 100%;
+    margin: 1rem 0;
+    border: none;
+    outline: none;
+    resize: none;
+    background: none;
+    color: var(--text-black);
+    field-sizing: content;
+    word-break: break-word;
+    overflow: hidden;
+}
+
+.comment-txt {
+    cursor: default;
+    margin: 1rem .5rem;
+}
+
+.editing-comment-txt {
+    padding: 0 .2rem;
+    border-radius: 0 10px 0 10px;
+    border: 2px solid var(--primary-color);
+}
+
+.comment-card button {
+    cursor: pointer;
+    border: none;
+    background-color: var(--primary-color);
+    border-radius: 0 10px 0 10px;
+    padding: .5rem 1rem;
+    font-size: 1rem;
+    color: var(--text-white);
+    box-shadow: 0px 0px 10px 0px black;
+    will-change: transform;
+    transition: transform .2s ease-in-out;
+}
+
+.comment-card button:hover,
+.comment-card button:focus {
+    transform: scale(1.1);
+}
+
+.prompt-btns {
+    display: flex;
+    gap: 1rem;
+    align-self: end;
+}
+
+.comment-user {
+    color: var(--text-black);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: .5rem;
+}
+
+.comment-date {
+    opacity: .7;
+    font-size: .9rem;
+}
