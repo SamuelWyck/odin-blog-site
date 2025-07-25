@@ -12,16 +12,20 @@
 }
 
 .comment-form textarea {
-    width: 100%;
+    max-width: 100%;
     outline: none;
     border: 3px solid var(--primary-color);
     border-radius: 0 10px 0 10px;
-    height: 10ch;
+    min-height: 14ch;
     font-family: "roboto", sans-serif;
     font-size: 1rem;
     padding: .5rem;
     color: var(--text-black);
     background-color: var(--text-white);
+    box-shadow: 0px 0px 10px 0px white;
+    field-sizing: content;
+    overflow: hidden;
+    word-break: break-word;
 }
 
 .comment-form button {
