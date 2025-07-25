@@ -32,7 +32,10 @@ function AuthPage({signup}) {
         reqBody = JSON.stringify(reqBody);
 
 
-        const res = await apiManager.authPost(reqBody, signup);
+        const res = await apiManager.authenticateUser(
+            reqBody, 
+            signup
+        );
         console.log(res)
         if (res.errors) {
             setErrors(res.errors);
