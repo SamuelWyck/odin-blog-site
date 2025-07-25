@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import api from "../utils/apiManager.js";
 import Header from "./header.jsx";
 import PostCard from "./postCard.jsx";
+import Footer from "./footer.jsx";
 
 
 
@@ -36,6 +37,7 @@ function HomePage() {
             {posts}
         </div>
         </div>
+        <Footer />
         </>
     );
 };
