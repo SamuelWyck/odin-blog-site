@@ -1,0 +1,31 @@
+.posts-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-rows: max-content;
+    gap: 5rem;
+    justify-content: center;
+    margin: 5rem 0;
+    max-width: 50%;
+    flex-shrink: 1;
+    flex-grow: 1;
+}
+
+.posts-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+
+
+@media only screen and (width <= 1200px) {
+    .posts-list {
+        max-width: 85%;
+    }
+}
+
+@media only screen and (width <= 600px) {
+    .posts-list {
+        max-width: 95%;
+    }
+}
