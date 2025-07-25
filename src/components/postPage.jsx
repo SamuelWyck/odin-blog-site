@@ -1,7 +1,8 @@
 import "../styles/postPage.css";
 import Header from "./header.jsx";
 import Footer from "./footer.jsx";
-import { useParams } from "react-router-dom";
+import CommentForm from "./commentForm.jsx";
+import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import apiManager from "../utils/apiManager.js";
 import readableDate from "../utils/readableDate.js";
@@ -60,7 +61,12 @@ function PostPage() {
             </p>
         </div>
         </div>
+        <p className="comments-title">Comments</p>
         <div className="comments"></div>
+        {(!user) ? 
+            <Link to="/login" className="comment-login">Log in to leave a comment</Link> :
+            <CommentForm />
+        }
     </div>
     <Footer />
     </>
