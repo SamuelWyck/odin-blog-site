@@ -62,6 +62,22 @@ class APIManager {
     };
 
 
+    async getApiKey() {
+        const url = `${this.#apiDomain}/admin/apikey`;
+        const token = this.#storage.getCookie();
+        const options = {
+            mode: "cors",
+            method: "GET",
+            headers: {
+                authorization: `Bearer ${token}`,
+            }
+        };
+
+        const response = await this.#makeApiCall(url, options);
+        return response;
+    }
+
+
     async editAuthoredPost(reqBody, postId) {
         const url = `${this.#apiDomain}/admin/posts/edit/${postId}`;
         const token = this.#storage.getCookie();
