@@ -11,6 +11,7 @@ function CommentForm({handleSubmit}) {
                     id="text" 
                     placeholder="Leave a comment"
                     required
+                    maxLength={10000}
                 ></textarea>
                 <button>Comment</button>
             </div>
