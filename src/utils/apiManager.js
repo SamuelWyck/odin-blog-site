@@ -62,6 +62,23 @@ class APIManager {
     };
 
 
+    async editAuthoredPost(reqBody, postId) {
+        const url = `${this.#apiDomain}/admin/posts/${postId}`;
+        const token = this.#storage.getCookie();
+        const options = {
+            mode: "cors",
+            method: "PUT",
+            body: reqBody,
+            headers: {
+                authorization: `Bearer ${token}`
+            }
+        };
+
+        const response = await this.#makeApiCall(url, options);
+        return response;
+    };
+
+
     async authenticateUser(reqBody, signup) {
         const endPoint = (signup) ? "signup" : "login"
         const url = `${this.#apiDomain}/auth/${endPoint}`;
