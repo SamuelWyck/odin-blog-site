@@ -18,6 +18,12 @@
     align-items: center;
 }
 
+.comment-author {
+    max-width: clamp(10ch, 8ch + 5vw, 20ch);
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .comment-btns {
     display: flex;
     gap: 1rem;
@@ -27,6 +33,7 @@
     font-size: 1.1rem;
     font-family: "roboto", sans-serif;
     max-width: 100%;
+    min-height: 5ch;
     margin: 1rem 0;
     border: none;
     outline: none;
