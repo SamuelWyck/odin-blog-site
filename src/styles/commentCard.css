@@ -1,7 +1,7 @@
 .comment-card {
     background-color: var(--primary-color);
     padding: 1rem;
-    border-radius: 0 10px 0 10px;
+    border-radius: 0 20px 0 20px;
     width: min(600px, 100%);
     background-color: var(--text-white);
     border: 3px solid var(--primary-color);

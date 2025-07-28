@@ -15,7 +15,7 @@
     max-width: 100%;
     outline: none;
     border: 3px solid var(--primary-color);
-    border-radius: 0 10px 0 10px;
+    border-radius: 0 20px 0 20px;
     min-height: 14ch;
     font-family: "roboto", sans-serif;
     font-size: 1rem;

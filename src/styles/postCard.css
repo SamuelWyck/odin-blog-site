@@ -16,7 +16,7 @@
     flex-direction: column;
     gap: 1rem;
     padding: 2rem;
-    border-radius: 0 20px 0 20px;
+    border-radius: 0 30px 0 30px;
     box-shadow: 0px 0px 20px -1px white;
     will-change: transform;
 }
@@ -78,7 +78,7 @@
     font-family: "roboto", sans-serif;
     font-size: 1rem;
     font-weight: bold;
-    border-radius: 0 20px 0 0;
+    border-radius: 0 30px 0 0;
     color: var(--primary-color);
     z-index: 2;
 }
