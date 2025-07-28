@@ -14,7 +14,8 @@ function PostCard({post, admin}) {
     async function handlePublish() {
         let reqBody = {
             title: post.title,
-            text: post.text
+            text: post.text,
+            preview: post.preview
         };
         if (!published) {
             reqBody.published = "true";
@@ -60,7 +61,7 @@ function PostCard({post, admin}) {
             <p className="post-date">{readableDate(post.createdAt)}</p>
         </div>
         <p className="post-title">{post.title}</p>
-        <p className="post-preview">{post.text.slice(0, 100)}...</p>
+        <p className="post-preview">{post.preview}...</p>
     </article>
     </Link>
     );
