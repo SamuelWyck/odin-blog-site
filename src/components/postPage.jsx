@@ -1,9 +1,7 @@
 import "../styles/postPage.css";
-import Header from "./header.jsx";
-import Footer from "./footer.jsx";
 import CommentForm from "./commentForm.jsx";
 import CommentCard from "./commentCard.jsx";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useOutletContext } from "react-router-dom";
 import { useEffect, useState } from "react";
 import apiManager from "../utils/apiManager.js";
 import readableDate from "../utils/readableDate.js";
@@ -12,6 +10,7 @@ import snakeImg from "../assets/snake.png";
 
 
 function PostPage() {
+    const {headerRef} = useOutletContext();
     const {postId} = useParams();
     const [user, setUser] = useState(null);
     const [post, setPost] = useState(null);
@@ -20,30 +19,34 @@ function PostPage() {
     
     useEffect(function() {
         apiManager.getPost(postId).then(function(res) {
-            setUser(res.user);
-            if (res.post) {
-                setPost({
-                    title: res.post.title,
-                    text: res.post.text,
-                    date: res.post.createdAt,
-                    author: res.post.author.username,
-                    replies: res.post.comments.length
-                });
-
-                const commentCards = [];
-                for (let comment of res.post.comments) {
-                    commentCards.push(
-                        <CommentCard 
-                            key={comment.id} 
-                            user={res.user} 
-                            comment={comment}
-                        />
-                    );
-                }
-                setComments(commentCards);
+            if (res.errors) {
+                return;
             }
+
+            headerRef.current.updateUser(res.user);
+            setUser(res.user);
+
+            setPost({
+                title: res.post.title,
+                text: res.post.text,
+                date: res.post.createdAt,
+                author: res.post.author.username,
+                replies: res.post.comments.length
+            });
+
+            const commentCards = [];
+            for (let comment of res.post.comments) {
+                commentCards.push(
+                    <CommentCard 
+                        key={comment.id} 
+                        user={res.user} 
+                        comment={comment}
+                    />
+                );
+            }
+            setComments(commentCards);
         });
-    }, [postId]);
+    }, [postId, headerRef]);
 
 
     function getCommentCards(comments) {
@@ -97,17 +100,11 @@ function PostPage() {
 
     if (!post) {
         return (
-        <>
-        <Header user={user} />
-        <p></p>
-        <Footer />
-        </>
+            <p></p>
         );
     }
 
     return (
-    <>
-    <Header user={user} />
     <div className="full-post">
         <div className="post-shadow">
         <div className="post">
@@ -134,8 +131,6 @@ function PostPage() {
             {comments}
         </div>
     </div>
-    <Footer />
-    </>
     );
 };
 

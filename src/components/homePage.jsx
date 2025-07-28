@@ -1,23 +1,26 @@
 import "../styles/homePage.css";
 import { useEffect, useState } from "react";
+import { useOutletContext } from "react-router-dom";
 import api from "../utils/apiManager.js";
-import Header from "./header.jsx";
 import PostCard from "./postCard.jsx";
-import Footer from "./footer.jsx";
 
 
 
 function HomePage() {
     const [posts, setPosts] = useState([]);
-    const [user, setUser] = useState(null);
+    const {headerRef} = useOutletContext();
 
     useEffect(function() {
         api.getPosts().then(function(res) {
+            if (res.errors) {
+                return;
+            }
+
             const postCards = getPostCards(res.posts);
-            setUser(res.user);
+            headerRef.current.updateUser(res.user);
             setPosts(postCards);
         });
-    }, []);
+    }, [headerRef]);
 
 
     function getPostCards(posts) {
@@ -32,15 +35,11 @@ function HomePage() {
 
 
     return (
-        <>
-        <Header user={user} />
         <div className="posts-wrapper">
-        <div className="posts-list">
-            {posts}
+            <div className="posts-list">
+                {posts}
+            </div>
         </div>
-        </div>
-        <Footer />
-        </>
     );
 };
 

@@ -1,16 +1,14 @@
 import "../styles/adminPage.css";
 import { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useOutletContext } from "react-router-dom";
 import apiManager from "../utils/apiManager.js";
-import Footer from "./footer.jsx";
-import Header from "./header.jsx";
 import PostCard from "./postCard.jsx";
 
 
 
 function AdminPage() {
     const navigate = useNavigate();
-    const [user, setUser] = useState(null);
+    const {headerRef} = useOutletContext();
     const [posts, setPosts] = useState([]);
     
     
@@ -36,23 +34,22 @@ function AdminPage() {
                 );
             }
 
-            setUser(res.user);
+            headerRef.current.updateUser(res.user);
             setPosts(posts);
         });
-    }, []);
+    }, [headerRef, navigate]);
 
 
     return (
-        <>
-        <Header user={user} />
         <main className="admin-main">
-            <Link className="new-post-link" to="/admin/posts/new">New Post</Link>
+            <Link 
+                className="new-post-link" 
+                to="/admin/posts/new"
+            >New Post</Link>
             <div className="admin-posts">
                 {posts}
             </div>
         </main>
-        <Footer />
-        </>
     );
 };
 
