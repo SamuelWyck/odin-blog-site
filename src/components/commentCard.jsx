@@ -87,7 +87,7 @@ function CommentCard({comment, user}) {
         <img src={snakeImg} alt="snake" className="post-img" />
         <div className="comment-info">
             <p className="comment-user">
-                @{comment.author.username}
+                <span className="comment-author">@{comment.author.username}</span>
                 <span className="comment-date"> {readableDate(comment.createdAt)}</span>
             </p>
             {(user && user.id === comment.authorId) ?
