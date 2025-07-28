@@ -41,6 +41,12 @@
     row-gap: .5rem;
 }
 
+.author {
+    max-width: 15ch;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .full-post-text {
     color: var(--text-black);
     font-size: 1.1rem;
