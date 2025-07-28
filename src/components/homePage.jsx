@@ -23,7 +23,9 @@ function HomePage() {
     function getPostCards(posts) {
         const postCards = [];
         for (let post of posts) {
-            postCards.push(<PostCard key={post.id} post={post}/>);
+            postCards.push(
+            <PostCard key={post.id} post={post} admin={false}/>
+        );
         }
         return postCards;
     };
