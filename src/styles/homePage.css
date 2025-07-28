@@ -4,7 +4,7 @@
     grid-auto-rows: max-content;
     gap: 5rem;
     justify-content: center;
-    max-width: min(800px, 100%);
+    max-width: min(720px, 100%);
     flex-shrink: 1;
     flex-grow: 1;
 }
@@ -17,17 +17,3 @@
     padding: 1rem;
     overflow: hidden;
 }
-
-
-
-/* @media only screen and (width <= 1200px) {
-    .posts-list {
-        max-width: 85%;
-    }
-}
-
-@media only screen and (width <= 600px) {
-    .posts-list {
-        max-width: 95%;
-    }
-} */
