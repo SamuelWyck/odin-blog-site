@@ -34,10 +34,18 @@ function PostCard({post, admin}) {
     };
 
 
+    function filterClicks(event) {
+        if (event.target.matches(".publish-btn")) {
+            event.preventDefault();
+        }
+    };
+
+
     return (
     <Link 
         className="post-link" 
         to={`/${(admin) ? "admin" : ""}/posts/${post.id}`}
+        onClick={filterClicks}
     >
     <article className="post-card">
         {
@@ -47,7 +55,7 @@ function PostCard({post, admin}) {
         </button>
         }
         <img src={snakeImg} alt="snake" className="post-img" />
-        <div className="post-info">
+        <div className={`post-info${(admin) ? " admin" : ""}`}>
             <p className="post-author">@{post.author.username}</p>
             <p className="post-date">{readableDate(post.createdAt)}</p>
         </div>
