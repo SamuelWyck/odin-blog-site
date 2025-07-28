@@ -77,13 +77,16 @@ class APIManager {
         return response;
     }
 
+    async #editOrCreatePost(reqBody, postId) {
+        const url = (postId) ?
+            `${this.#apiDomain}/admin/posts/edit/${postId}` :
+            `${this.#apiDomain}/admin/posts/new`;
 
-    async editAuthoredPost(reqBody, postId) {
-        const url = `${this.#apiDomain}/admin/posts/edit/${postId}`;
         const token = this.#storage.getCookie();
+
         const options = {
             mode: "cors",
-            method: "PUT",
+            method: (postId) ? "PUT" : "POST",
             body: reqBody,
             headers: {
                 authorization: `Bearer ${token}`,
@@ -92,6 +95,24 @@ class APIManager {
         };
 
         const response = await this.#makeApiCall(url, options);
+        return response;
+    };
+
+
+    async editAuthoredPost(reqBody, postId) {
+        const response = await this.#editOrCreatePost(
+            reqBody, 
+            postId
+        );
+        return response;
+    };
+
+
+    async newAuthoredPost(reqBody) {
+        const response = await this.#editOrCreatePost(
+            reqBody,
+            null
+        );
         return response;
     };
 
