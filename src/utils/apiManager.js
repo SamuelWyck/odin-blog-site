@@ -63,14 +63,15 @@ class APIManager {
 
 
     async editAuthoredPost(reqBody, postId) {
-        const url = `${this.#apiDomain}/admin/posts/${postId}`;
+        const url = `${this.#apiDomain}/admin/posts/edit/${postId}`;
         const token = this.#storage.getCookie();
         const options = {
             mode: "cors",
             method: "PUT",
             body: reqBody,
             headers: {
-                authorization: `Bearer ${token}`
+                authorization: `Bearer ${token}`,
+                "content-type": "application/json",
             }
         };
 
