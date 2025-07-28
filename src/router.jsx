@@ -1,6 +1,7 @@
 import HomePage from "./components/homePage.jsx";
 import AuthPage from "./components/authPage.jsx";
 import PostPage from "./components/postPage.jsx";
+import AdminPage from "./components/adminPage.jsx";
 import { Navigate } from "react-router-dom";
 
 
@@ -25,6 +26,10 @@ const routes = [
     {
         path: "/signup",
         element: <AuthPage signup={true} />
+    },
+    {
+        path: "/admin/posts",
+        element: <AdminPage />
     }
 ];
 
