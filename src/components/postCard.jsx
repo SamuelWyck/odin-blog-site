@@ -44,7 +44,7 @@ function PostCard({post, admin}) {
     return (
     <Link 
         className="post-link" 
-        to={`/${(admin) ? "admin" : ""}/posts/${post.id}`}
+        to={`${(admin) ? "admin" : ""}/posts/${post.id}`}
         onClick={filterClicks}
     >
     <article className="post-card">
