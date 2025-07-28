@@ -1,6 +1,6 @@
 import "../styles/adminPage.css";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import apiManager from "../utils/apiManager.js";
 import Footer from "./footer.jsx";
 import Header from "./header.jsx";
@@ -46,6 +46,7 @@ function AdminPage() {
         <>
         <Header user={user} />
         <main className="admin-main">
+            <Link className="new-post-link" to="/admin/posts/new">New Post</Link>
             <div className="admin-posts">
                 {posts}
             </div>
