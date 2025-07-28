@@ -5,7 +5,7 @@
 }
 
 .post-link:hover, .post-link:focus {
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 .post-card {
@@ -36,6 +36,7 @@
 
 .post-title {
     font-size: 1.6rem;
+    font-size: clamp(1.1rem, 1rem + 2vw, 1.6rem);
     font-weight: bold;
     max-width: clamp(16ch, 2ch + 70vw, 50ch);
     overflow: hidden;
