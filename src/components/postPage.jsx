@@ -117,9 +117,10 @@ function PostPage() {
                 <p className="full-post-date">{readableDate(post.date)}</p>
                 <p>Comments ({post.replies})</p>
             </div>
-            <p className="full-post-text">
-                {post.text}
-            </p>
+            <p 
+                className="full-post-text" 
+                dangerouslySetInnerHTML={{__html: post.text}}
+            ></p>
         </div>
         </div>
         <p className="comments-title">Comments</p>
