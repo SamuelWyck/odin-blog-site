@@ -6,7 +6,7 @@ import snakeImg from "../assets/snake.png";
 
 
 
-function CommentCard({comment, user}) {
+function CommentCard({comment, user, admin}) {
     const [deletePrompt, setDeletePrompt] = useState(false);
     const [editPrompt, setEditPrompt] = useState(false);
     const [editing, setEditing] = useState(false);
@@ -97,6 +97,14 @@ function CommentCard({comment, user}) {
                         Delete
                     </button>
                 </div> : 
+                null
+            }
+            {(user && user.id !== comment.authorId && admin) ?
+                <div className="comment-btns">
+                    <button onClick={handleDeletePrompt}>
+                        Delete
+                    </button>
+                </div> :
                 null
             }
         </div> 
