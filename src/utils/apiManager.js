@@ -90,6 +90,7 @@ class APIManager {
         const response = await this.#makeApiCall(url, options);
         return response;
     }
+    
 
     async #editOrCreatePost(reqBody, postId) {
         const url = (postId) ?
