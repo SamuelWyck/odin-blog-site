@@ -4,6 +4,7 @@ import AuthPage from "./components/authPage.jsx";
 import PostPage from "./components/postPage.jsx";
 import AdminPage from "./components/adminPage.jsx";
 import NewPostPage from "./components/newPostPage.jsx";
+import EditPostPage from "./components/editPostPage.jsx";
 import { Navigate } from "react-router-dom";
 
 
@@ -32,6 +33,10 @@ const routes = [
             {
                 path: "/admin/posts/new",
                 element: <NewPostPage />
+            },
+            {
+                path: "/admin/posts/:postId",
+                element: <EditPostPage />
             }
         ]
     },
