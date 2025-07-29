@@ -14,8 +14,9 @@ class APIManager {
     };
 
 
-    async getPosts() {
-        const url = `${this.#apiDomain}/posts`;
+    async #getPostOrPosts(postId) {
+        const endPoint = (postId) ? `/${postId}` : "";
+        const url = `${this.#apiDomain}/posts${endPoint}`;
         const token = this.#storage.getCookie();
         const options = {
             mode: "cors",
@@ -30,18 +31,14 @@ class APIManager {
     };
 
 
-    async getPost(postId) {
-        const url = `${this.#apiDomain}/posts/${postId}`;
-        const token = this.#storage.getCookie();
-        const options = {
-            mode: "cors",
-            method: "GET",
-            headers: {
-                authorization: `Bearer ${token}`
-            }
-        };
+    async getPosts() {
+        const response = await this.#getPostOrPosts(null);
+        return response;
+    };
 
-        const response = await this.#makeApiCall(url, options);
+
+    async getPost(postId) {
+        const response = await this.#getPostOrPosts(postId);
         return response;
     };
 
