@@ -14,7 +14,23 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 5rem 0 0 0;
     padding: 1rem;
     overflow: hidden;
+}
+
+.homepage {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 5rem 0;
+    overflow: hidden;
+}
+
+
+
+@media screen and (width < 720px) {
+    .homepage .pagination-btns {
+        padding: 0 1rem;
+    }
 }
