@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, Link, useOutletContext } from "react-router-dom";
 import apiManager from "../utils/apiManager.js";
 import PostCard from "./postCard.jsx";
+import PaginationButtons from "./paginationButtons.jsx";
 
 
 
@@ -10,10 +11,12 @@ function AdminPage() {
     const navigate = useNavigate();
     const {headerRef} = useOutletContext();
     const [posts, setPosts] = useState([]);
+    const [moreBtn, setMoreBtn] = useState(false);
+    const [pageNumber, setPageNumber] = useState(0);
     
     
     useEffect(function() {
-        apiManager.getAuthoredPosts().then(function(res) {
+        apiManager.getAuthoredPosts(pageNumber).then(function(res) {
             if (res.errors) {
                 navigate("/");
                 return;
@@ -36,8 +39,18 @@ function AdminPage() {
 
             headerRef.current.updateUser(res.user);
             setPosts(posts);
+            if (res.posts.length === apiManager.postPageLength) {
+                setMoreBtn(true);
+            } else {
+                setMoreBtn(false);
+            }
         });
-    }, [headerRef, navigate]);
+    }, [headerRef, navigate, pageNumber]);
+
+
+    function changePageNumber(change) {
+        setPageNumber(p => p + change);
+    };
 
 
     return (
@@ -49,6 +62,11 @@ function AdminPage() {
             <div className="admin-posts">
                 {posts}
             </div>
+            <PaginationButtons
+                handleClick={changePageNumber}
+                moreBtn={moreBtn}
+                pageNumber={pageNumber}
+            />
         </main>
     );
 };
