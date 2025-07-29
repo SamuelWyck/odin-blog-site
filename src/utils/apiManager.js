@@ -131,6 +131,22 @@ class APIManager {
     };
 
 
+    async deleteAuthoredPost(postId) {
+        const url = `${this.#apiDomain}/admin/posts/delete/${postId}`;
+        const token = this.#storage.getCookie();
+        const options = {
+            mode: "cors",
+            method: "DELETE",
+            headers: {
+                authorization: `Bearer ${token}`
+            }
+        };
+
+        const response = await this.#makeApiCall(url, options);
+        return response;
+    };
+
+
     async authenticateUser(reqBody, signup) {
         const endPoint = (signup) ? "signup" : "login"
         const url = `${this.#apiDomain}/auth/${endPoint}`;
