@@ -46,8 +46,10 @@ class APIManager {
     };
 
 
-    async #getAuthoredPostOrPosts(postId) {
-        const endPoint = (postId) ? `/${postId}` : "";
+    async #getAuthoredPostOrPosts({postId, pageNumber}) {
+        const endPoint = (postId) ? 
+            `/${postId}` : `?pageNumber=${pageNumber}`;
+            
         const url = `${this.#apiDomain}/admin/posts${endPoint}`;
         const token = this.#storage.getCookie();
         const options = {
@@ -63,18 +65,18 @@ class APIManager {
     };
 
 
-    async getAuthoredPosts() {
-        const response = await this.#getAuthoredPostOrPosts(
-            null
-        );
+    async getAuthoredPosts(pageNumber) {
+        const response = await this.#getAuthoredPostOrPosts({
+            pageNumber
+        });
         return response;
     };
 
 
     async getAuthoredPost(postId) {
-        const response = await this.#getAuthoredPostOrPosts(
+        const response = await this.#getAuthoredPostOrPosts({
             postId
-        );
+        });
         return response;
     };
 
