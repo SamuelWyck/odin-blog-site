@@ -5,6 +5,7 @@ import StorageManager from "./storageManager.js";
 class APIManager {
     #apiDomain = "http://localhost:3000";
     #storage = StorageManager;
+    postPageLength = 10;
 
 
     async #makeApiCall(url, options) {
@@ -14,8 +15,10 @@ class APIManager {
     };
 
 
-    async #getPostOrPosts(postId) {
-        const endPoint = (postId) ? `/${postId}` : "";
+    async #getPostOrPosts({postId, pageNumber}) {
+        const endPoint = (postId) ? 
+            `/${postId}` : `?pageNumber=${pageNumber}`;
+
         const url = `${this.#apiDomain}/posts${endPoint}`;
         const token = this.#storage.getCookie();
         const options = {
@@ -31,14 +34,14 @@ class APIManager {
     };
 
 
-    async getPosts() {
-        const response = await this.#getPostOrPosts(null);
+    async getPosts(pageNumber) {
+        const response = await this.#getPostOrPosts({pageNumber});
         return response;
     };
 
 
     async getPost(postId) {
-        const response = await this.#getPostOrPosts(postId);
+        const response = await this.#getPostOrPosts({postId});
         return response;
     };
 
@@ -90,7 +93,7 @@ class APIManager {
         const response = await this.#makeApiCall(url, options);
         return response;
     }
-    
+
 
     async #editOrCreatePost(reqBody, postId) {
         const url = (postId) ?
