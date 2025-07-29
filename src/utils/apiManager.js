@@ -131,12 +131,13 @@ class APIManager {
     };
 
 
-    async newComment(reqBody) {
-        const url = `${this.#apiDomain}/comments/new`;
+    async #editOrCreateComment(reqBody, commentId) {
+        const endPoint = (commentId) ? `edit/${commentId}` : `new`;
+        const url = `${this.#apiDomain}/comments/${endPoint}`;
         const token = this.#storage.getCookie();
         const options = {
             mode: "cors",
-            method: "POST",
+            method: (commentId) ? "PUT" : "POST",
             body: reqBody,
             headers: {
                 "content-type": "application/json",
@@ -149,20 +150,20 @@ class APIManager {
     };
 
 
-    async editComment(reqBody, commentId) {
-        const url = `${this.#apiDomain}/comments/edit/${commentId}`;
-        const token = this.#storage.getCookie();
-        const options = {
-            mode: "cors",
-            method: "PUT",
-            body: reqBody,
-            headers: {
-                "content-type": "application/json",
-                authorization: `Bearer ${token}`
-            }
-        };
+    async newComment(reqBody) {
+        const response = await this.#editOrCreateComment(
+            reqBody,
+            null
+        );
+        return response;
+    };
 
-        const response = await this.#makeApiCall(url, options);
+
+    async editComment(reqBody, commentId) {
+        const response = await this.#editOrCreateComment(
+            reqBody,
+            commentId
+        );
         return response;
     };
 
