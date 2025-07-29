@@ -19,7 +19,7 @@ function PostPage() {
     
     useEffect(function() {
         apiManager.getPost(postId).then(function(res) {
-            if (res.errors) {
+            if (res.errors || !res.post) {
                 return;
             }
 
