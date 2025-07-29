@@ -43,8 +43,9 @@ class APIManager {
     };
 
 
-    async getAuthoredPosts() {
-        const url = `${this.#apiDomain}/admin/posts`;
+    async #getAuthoredPostOrPosts(postId) {
+        const endPoint = (postId) ? `/$${postId}` : "";
+        const url = `${this.#apiDomain}/admin/posts${endPoint}`;
         const token = this.#storage.getCookie();
         const options = {
             mode: "cors",
@@ -55,6 +56,22 @@ class APIManager {
         };
 
         const response = await this.#makeApiCall(url, options);
+        return response;
+    };
+
+
+    async getAuthoredPosts() {
+        const response = await this.#getAuthoredPostOrPosts(
+            null
+        );
+        return response;
+    };
+
+
+    async getAuthoredPost(postId) {
+        const response = await this.#getAuthoredPostOrPosts(
+            postId
+        );
         return response;
     };
 
