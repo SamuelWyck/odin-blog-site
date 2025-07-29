@@ -86,3 +86,13 @@
     max-width: 28ch;
     word-break: break-word;
 }
+
+.post-del-btns-wrapper {
+    width: 100%;
+    display: flex;
+    gap: 2rem;
+}
+
+.post-del-btns-wrapper > button {
+    width: 50%;
+}
