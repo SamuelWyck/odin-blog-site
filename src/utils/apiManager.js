@@ -44,7 +44,7 @@ class APIManager {
 
 
     async #getAuthoredPostOrPosts(postId) {
-        const endPoint = (postId) ? `/$${postId}` : "";
+        const endPoint = (postId) ? `/${postId}` : "";
         const url = `${this.#apiDomain}/admin/posts${endPoint}`;
         const token = this.#storage.getCookie();
         const options = {
