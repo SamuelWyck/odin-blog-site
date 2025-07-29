@@ -41,6 +41,7 @@ function PostPage() {
                         key={comment.id} 
                         user={res.user} 
                         comment={comment}
+                        admin={false}
                     />
                 );
             }
@@ -57,6 +58,7 @@ function PostPage() {
                     user={user} 
                     key={comment.id} 
                     comment={comment}
+                    admin={false}
                 />
             );
         }
