@@ -4,6 +4,7 @@ import { useOutletContext } from "react-router-dom";
 import api from "../utils/apiManager.js";
 import PostCard from "./postCard.jsx";
 import apiManager from "../utils/apiManager.js";
+import PaginationButtons from "./paginationButtons.jsx";
 
 
 
@@ -44,7 +45,6 @@ function HomePage() {
 
     function changePageNumber(change) {
         setPageNumber(p => p + change);
-        window.scrollTo({top: 0, behavior: "smooth"});
     };
 
 
@@ -53,21 +53,11 @@ function HomePage() {
         <div className="posts-list">
             {posts}
         </div>
-        <div className="pagination-btns">
-            {(pageNumber > 0) ?
-                <button onClick={() => changePageNumber(-1)}>
-                    Prev Posts
-                </button> :
-                <p></p>
-            }
-            <p></p>
-            {(moreBtn) ?
-                <button onClick={() => changePageNumber(1)}>
-                    More Posts
-                </button> :
-                <p></p>
-            }
-        </div>
+        <PaginationButtons
+            handleClick={changePageNumber}
+            moreBtn={moreBtn}
+            pageNumber={pageNumber}
+        />
     </div>
     );
 };
