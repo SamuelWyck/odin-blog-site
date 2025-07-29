@@ -49,9 +49,11 @@ function HomePage() {
 
 
     return (
-    <div className="posts-wrapper">
-        <div className="posts-list">
-            {posts}
+    <div className="homepage">
+        <div className="posts-wrapper">
+            <div className="posts-list">
+                {posts}
+            </div>
         </div>
         <PaginationButtons
             handleClick={changePageNumber}
