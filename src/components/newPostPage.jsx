@@ -36,6 +36,7 @@ function NewPostPage() {
         };
         for (let entry of formData.entries()) {
             const [key, value] = entry;
+            console.log(entry)
             reqBody[key] = value;
         }
         reqBody = JSON.stringify(reqBody);
@@ -76,8 +77,8 @@ function NewPostPage() {
                     required
                 />
                 <div>
-                    <label htmlFor="publish">Publish? </label>
-                    <input type="checkbox" name="publish" id="publish" />
+                    <label htmlFor="published">Publish? </label>
+                    <input type="checkbox" name="published" id="published" />
                 </div>
             </div>
             <div className="preview-wrapper">
@@ -88,7 +89,7 @@ function NewPostPage() {
                     required
                 />
             </div>
-            <EditorElement apiKey={apiKey} value={""} handleChange={editorChange} />
+            <EditorElement apiKey={apiKey} initValue={""} handleChange={editorChange} />
             <button>Create Post</button>
         </form>
         </div>
