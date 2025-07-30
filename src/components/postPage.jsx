@@ -39,26 +39,15 @@ function PostPage() {
             const moreBtnStatus = checkForMoreCmts(
                 res.post.comments
             );
-
-            const commentCards = [];
-            for (let comment of res.post.comments) {
-                commentCards.push(
-                    <CommentCard 
-                        user={res.user} 
-                        key={comment.id} 
-                        comment={comment}
-                        admin={false}
-                        updateComments={handleCommentDelete}
-                    />
-                );
-            }
-            setComments(commentCards);
+            setComments(
+                getCommentCards(res.post.comments, res.user)
+            );
             setMoreBtn(moreBtnStatus);
         });
     }, [postId, headerRef]);
 
 
-    function getCommentCards(comments) {
+    function getCommentCards(comments, user) {
         const commentCards = [];
         for (let comment of comments) {
             commentCards.push(
@@ -133,9 +122,13 @@ function PostPage() {
         const moreBtnStatus = checkForMoreCmts(
             comments.comments
         );
-        setComments(getCommentCards(comments.comments));
+        setComments(
+            getCommentCards(comments.comments, comments.user)
+        );
         setMoreBtn(moreBtnStatus);
         setPageNumber(newPageNumber);
+        setUser(comments.user);
+        headerRef.current.updateUser(comments.user);
     };
 
 
@@ -151,9 +144,11 @@ function PostPage() {
         }
 
         const moreBtnStatus = checkForMoreCmts(res.comments);
-        setComments(getCommentCards(res.comments));
+        setComments(getCommentCards(res.comments, res.user));
         setPageNumber(newPageNumber);
         setMoreBtn(moreBtnStatus);
+        setUser(res.user);
+        headerRef.current.updateUser(res.user);
     };
 
 
@@ -170,9 +165,11 @@ function PostPage() {
         }
 
         const moreBtnStatus = checkForMoreCmts(res.comments);
-        setComments(getCommentCards(res.comments));
+        setComments(getCommentCards(res.comments, res.user));
         setPageNumber(newPageNumber);
         setMoreBtn(moreBtnStatus);
+        setUser(res.user);
+        headerRef.current.updateUser(res.user);
     };
 
 
