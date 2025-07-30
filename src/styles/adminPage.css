@@ -3,6 +3,7 @@
     flex-direction: column;
     align-items: center;
     overflow: hidden;
+    padding: 0 1rem;
 }
 
 .admin-posts {
@@ -31,4 +32,8 @@
 .new-post-link:hover, .new-post-link:focus {
     transform: scale(1.1);
     color: var(--text-black);
+}
+
+.admin-main .pagination-btns {
+    margin: .5rem 0 5rem 0;
 }
