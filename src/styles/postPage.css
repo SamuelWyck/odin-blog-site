@@ -89,6 +89,10 @@
     gap: 3rem;
 }
 
+.comments .pagination-btns {
+    margin: 1rem 0 0 0;
+}
+
 
 
 @media screen and (width <= 400px) {
