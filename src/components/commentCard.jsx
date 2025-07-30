@@ -6,12 +6,11 @@ import snakeImg from "../assets/snake.png";
 
 
 
-function CommentCard({comment, user, admin}) {
+function CommentCard({comment, user, admin, updateComments}) {
     const [deletePrompt, setDeletePrompt] = useState(false);
     const [editPrompt, setEditPrompt] = useState(false);
     const [editing, setEditing] = useState(false);
     const [textValue, setTextValue] = useState(comment.text);
-    const [deleted, setDeleted] = useState(false);
 
 
     function handleDeletePrompt() {
@@ -74,13 +73,9 @@ function CommentCard({comment, user, admin}) {
             return;
         }
 
-        setDeleted(true);
+        updateComments();
     };
 
-
-    if (deleted) {
-        return null;
-    }
 
     return (
     <div className="comment-card">
