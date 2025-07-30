@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import apiManager from "../utils/apiManager.js";
 import readableDate from "../utils/readableDate.js";
 import snakeImg from "../assets/snake.png";
+import PaginationButtons from "./paginationButtons.jsx";
 
 
 
@@ -15,6 +16,8 @@ function PostPage() {
     const [user, setUser] = useState(null);
     const [post, setPost] = useState(null);
     const [comments, setComments] = useState(null);
+    const [moreBtn, setMoreBtn] = useState(false);
+    const [pageNumber, setPageNumber] = useState(0);
 
     
     useEffect(function() {
@@ -30,22 +33,27 @@ function PostPage() {
                 title: res.post.title,
                 text: res.post.text,
                 date: res.post.createdAt,
-                author: res.post.author.username,
-                replies: res.post.comments.length
+                author: res.post.author.username
             });
+
+            const moreBtnStatus = checkForMoreCmts(
+                res.post.comments
+            );
 
             const commentCards = [];
             for (let comment of res.post.comments) {
                 commentCards.push(
                     <CommentCard 
-                        key={comment.id} 
                         user={res.user} 
+                        key={comment.id} 
                         comment={comment}
                         admin={false}
+                        updateComments={handleCommentDelete}
                     />
                 );
             }
             setComments(commentCards);
+            setMoreBtn(moreBtnStatus);
         });
     }, [postId, headerRef]);
 
@@ -59,6 +67,7 @@ function PostPage() {
                     key={comment.id} 
                     comment={comment}
                     admin={false}
+                    updateComments={handleCommentDelete}
                 />
             );
         }
@@ -66,9 +75,8 @@ function PostPage() {
     };
 
 
-    async function handleCommentSubmit(event) {
-        event.preventDefault();
-        const formData = new FormData(event.target);
+    function getReqBody(form) {
+        const formData = new FormData(form);
 
         let reqBody = {
             postid: postId
@@ -79,23 +87,92 @@ function PostPage() {
         }
 
         if (!reqBody.text.trim()) {
-            return;
+            return null;
         }
         reqBody = JSON.stringify(reqBody);
+        return reqBody;
+    };
+
+
+    function checkForMoreCmts(commentsList) {
+        let moreBtnStatus = false;
+
+        const numberComments = commentsList.length;
+        if (numberComments === apiManager.cmtPageLength) {
+            commentsList.pop();
+            moreBtnStatus = true;
+        }
+
+        return moreBtnStatus;
+    };
+
+
+    async function handleCommentSubmit(event) {
+        event.preventDefault();
+        const newPageNumber = 0;
+
+        const reqBody = getReqBody(event.target);
+        if (!reqBody) {
+            return;
+        }
 
         const res = await apiManager.newComment(reqBody);
-
         if (res.errors) {
-            console.log(res.errors);
             return;
         }
 
         event.target.reset();
 
-        const newPost = await apiManager.getPost(postId);
-        if (newPost.post) {
-            setComments(getCommentCards(newPost.post.comments));
+        const comments = await apiManager.getComments(
+            postId, newPageNumber
+        );
+        if (comments.errors) {
+            return;
         }
+
+        const moreBtnStatus = checkForMoreCmts(
+            comments.comments
+        );
+        setComments(getCommentCards(comments.comments));
+        setMoreBtn(moreBtnStatus);
+        setPageNumber(newPageNumber);
+    };
+
+
+    async function handleCommentDelete() {
+        const newPageNumber = 0;
+        
+        const res = await apiManager.getComments(
+            postId, newPageNumber
+        );
+
+        if (res.errors) {
+            return;
+        }
+
+        const moreBtnStatus = checkForMoreCmts(res.comments);
+        setComments(getCommentCards(res.comments));
+        setPageNumber(newPageNumber);
+        setMoreBtn(moreBtnStatus);
+    };
+
+
+    async function handlePagination(pageChange) {
+        const newPageNumber = (pageNumber + pageChange >= 0) ?
+        pageNumber + pageChange : pageNumber;
+
+        const res = await apiManager.getComments(
+            postId, newPageNumber
+        );
+
+        if (res.errors) {
+            return;
+        }
+
+        const moreBtnStatus = checkForMoreCmts(res.comments);
+        setComments(getCommentCards(res.comments));
+        setPageNumber(newPageNumber);
+        setMoreBtn(moreBtnStatus);
     };
 
 
@@ -117,7 +194,6 @@ function PostPage() {
             <div className="full-post-info">
                 <p className="author">@{post.author}</p>
                 <p className="full-post-date">{readableDate(post.date)}</p>
-                <p>Comments ({post.replies})</p>
             </div>
             <p 
                 className="full-post-text" 
@@ -132,6 +208,12 @@ function PostPage() {
         }
         <div className="comments">
             {comments}
+            <PaginationButtons
+                moreBtn={moreBtn}
+                pageNumber={pageNumber}
+                handleClick={handlePagination}
+                comments={true}
+            />
         </div>
     </div>
     );
