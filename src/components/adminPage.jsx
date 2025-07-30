@@ -26,30 +26,37 @@ function AdminPage() {
                 return;
             }
 
-            const posts = [];
-            for (let post of res.posts) {
-                posts.push(
-                    <PostCard 
-                        post={post} 
-                        key={post.id} 
-                        admin={true} 
-                    />
-                );
+            let moreBtnStatus = false;
+            const numberPosts = res.posts.length;
+            if (numberPosts === apiManager.postPageLength) {
+                res.posts.pop();
+                moreBtnStatus = true;
             }
 
             headerRef.current.updateUser(res.user);
-            setPosts(posts);
-            if (res.posts.length === apiManager.postPageLength) {
-                setMoreBtn(true);
-            } else {
-                setMoreBtn(false);
-            }
+            setPosts(getPostCards(res.posts));
+            setMoreBtn(moreBtnStatus);
         });
     }, [headerRef, navigate, pageNumber]);
 
 
     function changePageNumber(change) {
         setPageNumber(p => p + change);
+    };
+
+
+    function getPostCards(posts) {
+        const postCards = [];
+        for (let post of posts) {
+            postCards.push(
+                <PostCard 
+                    post={post} 
+                    key={post.id} 
+                    admin={true} 
+                />
+            );
+        }
+        return postCards;
     };
 
 
@@ -66,6 +73,7 @@ function AdminPage() {
                 handleClick={changePageNumber}
                 moreBtn={moreBtn}
                 pageNumber={pageNumber}
+                comments={false}
             />
         </main>
     );
