@@ -10,7 +10,7 @@ import PaginationButtons from "./paginationButtons.jsx";
 
 function HomePage() {
     const [pageNumber, setPageNumber] = useState(0);
-    const [moreBtn, setMoreBtn] = useState(true);
+    const [moreBtn, setMoreBtn] = useState(false);
     const [posts, setPosts] = useState([]);
     const {headerRef} = useOutletContext();
 
@@ -20,14 +20,16 @@ function HomePage() {
                 return;
             }
 
-            const postCards = getPostCards(res.posts);
-            headerRef.current.updateUser(res.user);
-            setPosts(postCards);
-            if (res.posts.length == apiManager.postPageLength) {
-                setMoreBtn(true);
-            } else {
-                setMoreBtn(false);
+            let moreBtnStatus = false;
+            const numberPosts = res.posts.length;
+            if (numberPosts === apiManager.postPageLength) {
+                res.posts.pop();
+                moreBtnStatus = true;
             }
+
+            headerRef.current.updateUser(res.user);
+            setPosts(getPostCards(res.posts));
+            setMoreBtn(moreBtnStatus);
         });
     }, [headerRef, pageNumber]);
 
@@ -59,6 +61,7 @@ function HomePage() {
             handleClick={changePageNumber}
             moreBtn={moreBtn}
             pageNumber={pageNumber}
+            comments={false}
         />
     </div>
     );
