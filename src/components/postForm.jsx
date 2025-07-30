@@ -1,9 +1,9 @@
 import "../styles/postForm.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import apiManager from "../utils/apiManager";
-import ErrorsPartial from "./errorsPartial";
-import EditorElement from "./EditorElement";
+import apiManager from "../utils/apiManager.js";
+import ErrorsPartial from "./errorsPartial.jsx";
+import EditorElement from "./editorElement.jsx";
 
 
 
