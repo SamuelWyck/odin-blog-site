@@ -5,7 +5,8 @@ import StorageManager from "./storageManager.js";
 class APIManager {
     #apiDomain = "http://localhost:3000";
     #storage = StorageManager;
-    postPageLength = 10;
+    postPageLength = 11;
+    cmtPageLength = 11;
 
 
     async #makeApiCall(url, options) {
@@ -215,6 +216,23 @@ class APIManager {
             method: "DELETE",
             headers: {
                 "content-type": "application/json",
+                authorization: `Bearer ${token}`
+            }
+        };
+
+        const response = await this.#makeApiCall(url, options);
+        return response;
+    };
+
+
+    async getComments(postId, pageNumber) {
+        const endPoint = `/${postId}?pageNumber=${pageNumber}`;
+        const url = `${this.#apiDomain}/comments${endPoint}`;
+        const token = this.#storage.getCookie();
+        const options = {
+            mode: "cors",
+            method: "GET",
+            headers: {
                 authorization: `Bearer ${token}`
             }
         };
