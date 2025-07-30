@@ -2,27 +2,44 @@ import "../styles/paginationButtons.css";
 
 
 
-function PaginationButtons({pageNumber, moreBtn, handleClick}) {
+function PaginationButtons({
+    pageNumber, moreBtn, handleClick, comments
+}) {
 
 
     function changePageNumber(change) {
         handleClick(change);
-        window.scrollTo({top: 0, behavior: "smooth"});
+        if (comments) {
+            null
+        } else {
+            window.scrollTo({top: 0, behavior: "smooth"});
+        }
     };
+
+
+    if (pageNumber === 0 && !moreBtn) {
+        return null;
+    }
 
 
     return (
         <div className="pagination-btns">
             {(pageNumber > 0) ?
                 <button onClick={() => changePageNumber(-1)}>
-                    Prev Posts
+                    {
+                        (comments) ?
+                        "Prev Cmts" : "Prev Posts"
+                    }
                 </button> :
                 <p></p>
             }
             <p></p>
             {(moreBtn) ?
                 <button onClick={() => changePageNumber(1)}>
-                    More Posts
+                    {
+                        (comments) ? 
+                        "More Cmts" : "More Posts"
+                    }
                 </button> :
                 <p></p>
             }
