@@ -30,12 +30,13 @@ function NewPostPage() {
     return (
         <PostForm
             edit={false}
+            apiKey={apiKey}
             postId={null}
             editorValue={""}
             titleValue={""}
             previewValue={""}
             published={false}
-            apiKey={apiKey}
+            imageId={null}
         />
     );
 };
