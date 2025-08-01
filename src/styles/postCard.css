@@ -66,6 +66,23 @@
     top: 2%;
 }
 
+.post-thumbnail-wrapper {
+    z-index: 2;
+    max-width: 400px;
+    max-height: 400px;
+    overflow: hidden;
+    margin: 0 auto 1rem auto;
+}
+
+.post-thumbnail {
+    max-width: 100%;
+    filter: brightness(.9);
+}
+
+.post-thumbnail-wrapper.admin {
+    margin: 2rem auto 0 auto;
+}
+
 .publish-btn {
     cursor: pointer;
     position: absolute;
