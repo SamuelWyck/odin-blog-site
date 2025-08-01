@@ -125,6 +125,7 @@ function EditPostPage() {
             editorValue={post.text}
             published={post.posted}
             postId={post.id}
+            imageId={post.imageId}
         />
         <p className="comments-title">Comments</p>
         <div className="comments">
