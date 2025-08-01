@@ -9,10 +9,8 @@ function PaginationButtons({
 
     function changePageNumber(change) {
         handleClick(change);
-        if (comments) {
-            null
-        } else {
-            window.scrollTo({top: 0, behavior: "smooth"});
+        if (!comments) {
+            window.scrollTo();
         }
     };
 
