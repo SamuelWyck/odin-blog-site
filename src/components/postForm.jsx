@@ -26,6 +26,7 @@ function PostForm({
     async function deletePost() {
         const res = await apiManager.deleteAuthoredPost(postId);
         if (res.errors) {
+            setErrors(res.errors);
             return;
         }
 
