@@ -14,3 +14,9 @@ html {
   --text-white: hsl(0, 0%, 95%);
   --text-black: hsl(0, 0%, 5%);
 }
+
+@media screen and (width <= 450px) {
+  html {
+    font-size: 13px;
+  }
+}
