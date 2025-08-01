@@ -10,7 +10,7 @@ function PaginationButtons({
     function changePageNumber(change) {
         handleClick(change);
         if (!comments) {
-            window.scrollTo();
+            window.scrollTo({top: 0, behavior: "smooth"});
         }
     };
 
