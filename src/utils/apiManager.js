@@ -111,7 +111,6 @@ class APIManager {
             body: reqBody,
             headers: {
                 authorization: `Bearer ${token}`,
-                "content-type": "application/json",
             }
         };
 
