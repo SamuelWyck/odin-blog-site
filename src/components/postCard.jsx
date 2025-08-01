@@ -12,18 +12,17 @@ function PostCard({post, admin}) {
 
 
     async function handlePublish() {
-        let reqBody = {
-            title: post.title,
-            text: post.text,
-            preview: post.preview
-        };
-        if (!published) {
-            reqBody.published = "true";
+        const formData = new FormData();
+        for (let key of Object.keys(post)) {
+            if (key === "posted" && !published) {
+                formData.append("published", "true");
+                continue;
+            }
+            formData.append(key, post[key]);
         }
-        reqBody = JSON.stringify(reqBody);
 
         const res = await apiManager.editAuthoredPost(
-            reqBody,
+            formData,
             post.id
         );
 
@@ -58,7 +57,23 @@ function PostCard({post, admin}) {
             {(published) ? "Unpublish" : "Publish"}
         </button>
         }
-        <img src={snakeImg} alt="snake" className="post-img" />
+        {(post.imageUrl) ?
+        <div 
+            className={
+                `post-thumbnail-wrapper${(admin) ? " admin" : ""}`
+            }
+        >
+            <img 
+                className="post-thumbnail"
+                src={post.imageUrl} 
+            /> 
+        </div> : null
+        }
+        <img 
+            className="post-img"
+            src={snakeImg} 
+            alt="snake" 
+        />
         <div className={`post-info${(admin) ? " admin" : ""}`}>
             <p className="post-author">@{post.author.username}</p>
             <p className="post-date">{readableDate(post.createdAt)}</p>
