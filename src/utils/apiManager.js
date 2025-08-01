@@ -239,6 +239,24 @@ class APIManager {
         const response = await this.#makeApiCall(url, options);
         return response;
     };
+
+
+    async validCookie() {
+        if (!this.#storage.cookieExists()) {
+            return false;
+        }
+
+        const token = this.#storage.getCookie();
+        const query = `?token=${token}`;
+        const url = `${this.#apiDomain}/auth/valid${query}`;
+        const options = {
+            mode: "cors",
+            method: "GET"
+        };
+
+        const response = await this.#makeApiCall(url, options);
+        return response.valid;
+    };
 };
 
 
