@@ -33,7 +33,8 @@ function PostPage() {
                 title: res.post.title,
                 text: res.post.text,
                 date: res.post.createdAt,
-                author: res.post.author.username
+                author: res.post.author.username,
+                imageUrl: res.post.imageUrl
             });
 
             const moreBtnStatus = checkForMoreCmts(
@@ -184,6 +185,14 @@ function PostPage() {
     <div className="full-post">
         <div className="post-shadow">
         <div className="post">
+            {!post.imageUrl ||
+                <div className="full-post-img-wrapper">
+                <img 
+                    className="full-post-image" 
+                    src={post.imageUrl}
+                />
+                </div>
+            }
             <p className="full-post-title">
                 <img src={snakeImg} alt="snake" className="post-img" />
                 {post.title}
