@@ -14,7 +14,8 @@ function PostForm({
     published, 
     apiKey, 
     edit,
-    postId
+    postId,
+    imageId
 }) {
     const navigate = useNavigate();
     const [editorTxt, setEditorTxt] = useState(editorValue);
@@ -41,17 +42,11 @@ function PostForm({
         event.preventDefault();
 
         const formData = new FormData(event.target);
-        let reqBody = {
-            text: editorTxt
-        };
-        for (let entry of formData.entries()) {
-            const [key, value] = entry;
-            reqBody[key] = value;
-        }
-        reqBody = JSON.stringify(reqBody);
+        formData.append("text", editorTxt);
+        formData.append("imageId", imageId);
 
         const res = await apiManager.editAuthoredPost(
-            reqBody, 
+            formData, 
             postId
         );
 
@@ -68,17 +63,9 @@ function PostForm({
         event.preventDefault();
 
         const formData = new FormData(event.target);
-        let reqBody = {
-            text: editorTxt
-        };
-        for (let entry of formData.entries()) {
-            const [key, value] = entry;
-            console.log(entry)
-            reqBody[key] = value;
-        }
-        reqBody = JSON.stringify(reqBody);
+        formData.append("text", editorTxt);
 
-        const res = await apiManager.newAuthoredPost(reqBody);
+        const res = await apiManager.newAuthoredPost(formData);
 
         if (res.errors) {
             setErrors(res.errors);
@@ -91,8 +78,10 @@ function PostForm({
 
     return (
         <div className="post-form-wrapper">
-        <form className="new-post-form" 
+        <form 
+            className="new-post-form" 
             onSubmit={(edit) ? editSubmit : newSubmit}
+            encType="multipart/form-data"
         >
             <ErrorsPartial errors={errors} />
             <div className="title-publish-wrapper">
@@ -123,6 +112,28 @@ function PostForm({
                     required
                     defaultValue={previewValue}
                 />
+            </div>
+            <div className="upload-wrapper">
+                <label 
+                    className="image-upload" 
+                    htmlFor="image"
+                >Upload Image (jpg/png)</label>
+                <input 
+                    type="file" 
+                    name="image" 
+                    id="image" 
+                    hidden 
+                />
+                {!imageId ||
+                <div>
+                <label htmlFor="delete-img">Delete Image?</label>
+                <input 
+                    type="checkbox" 
+                    name="deleteImg" 
+                    id="delete-img"
+                />
+                </div>
+                }
             </div>
             <EditorElement 
                 apiKey={apiKey} 
