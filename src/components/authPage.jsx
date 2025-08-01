@@ -1,7 +1,7 @@
 import "../styles/authPage.css";
 import snakeImg from "../assets/snake.png";
 import { Link, useNavigate, Navigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import storage from "../utils/storageManager";
 import apiManager from "../utils/apiManager";
 import ErrorsPartial from "./errorsPartial";
@@ -14,10 +14,14 @@ function AuthPage({signup}) {
     const [pwd, setPwd] = useState("");
     const [confirmPwd, setConfirmPwd] = useState("");
 
-    
-    if (storage.cookieExists()) {
-        return <Navigate to="/" replace />;
-    }
+
+    useEffect(function() {
+        apiManager.validCookie().then(function(valid) {
+            if (valid) {
+                navigate("/", {replace: true});
+            }
+        });
+    }, [navigate])
 
 
     async function handleSubmit(event) {
