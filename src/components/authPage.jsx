@@ -76,12 +76,8 @@ function AuthPage({signup}) {
         {!signup || 
         <>
         <div>
-            <label htmlFor="firstname">First name</label>
-            <input type="text" name="firstname" id="firstname" required/>
-        </div>
-        <div>
-            <label htmlFor="lastname">Last name</label>
-            <input type="text" name="lastname" id="lastname" required/>
+            <label htmlFor="email">Email</label>
+            <input type="email" name="email" id="email" required/>
         </div>
         </>
         }
