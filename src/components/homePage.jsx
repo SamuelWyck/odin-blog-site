@@ -11,7 +11,7 @@ import PaginationButtons from "./paginationButtons.jsx";
 function HomePage() {
     const [pageNumber, setPageNumber] = useState(0);
     const [moreBtn, setMoreBtn] = useState(false);
-    const [posts, setPosts] = useState([]);
+    const [posts, setPosts] = useState(null);
     const {headerRef} = useOutletContext();
 
     useEffect(function() {
@@ -49,6 +49,15 @@ function HomePage() {
         setPageNumber(p => p + change);
     };
 
+
+
+    if (!posts) {
+        return (
+            <div className="loading-wrapper">
+                <p className="loading">Loading...</p>
+            </div>
+        );
+    }
 
     return (
     <div className="homepage">

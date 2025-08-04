@@ -111,8 +111,12 @@ function EditPostPage() {
 
 
 
-    if (!apiKey) {
-        return <p></p>;
+    if (!post || !apiKey) {
+        return (
+            <div className="loading-wrapper">
+                <p className="loading">Loading...</p>
+            </div>
+        );
     }
 
     return (

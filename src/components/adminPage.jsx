@@ -10,7 +10,7 @@ import PaginationButtons from "./paginationButtons.jsx";
 function AdminPage() {
     const navigate = useNavigate();
     const {headerRef} = useOutletContext();
-    const [posts, setPosts] = useState([]);
+    const [posts, setPosts] = useState(null);
     const [moreBtn, setMoreBtn] = useState(false);
     const [pageNumber, setPageNumber] = useState(0);
     
@@ -59,6 +59,15 @@ function AdminPage() {
         return postCards;
     };
 
+
+
+    if (!posts) {
+        return (
+            <div className="loading-wrapper">
+                <p className="loading">Loading...</p>
+            </div>
+        );
+    }
 
     return (
         <main className="admin-main">

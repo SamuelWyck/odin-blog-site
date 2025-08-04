@@ -177,7 +177,9 @@ function PostPage() {
 
     if (!post) {
         return (
-            <p></p>
+            <div className="loading-wrapper">
+                <p className="loading">Loading...</p>
+            </div>
         );
     }
 
