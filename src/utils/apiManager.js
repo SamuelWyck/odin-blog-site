@@ -3,7 +3,8 @@ import StorageManager from "./storageManager.js";
 
 
 class APIManager {
-    #apiDomain = "http://localhost:3000";
+    // #apiDomain = "http://localhost:3000";
+    #apiDomain = "https://snakepit.koyeb.app";
     #storage = StorageManager;
     postPageLength = 11;
     cmtPageLength = 11;
