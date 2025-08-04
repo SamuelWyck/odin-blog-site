@@ -42,7 +42,7 @@ class Header extends Component {
                     alt="snake" 
                     className="banner-img" 
                 />
-                <p className="banner-logo">Viper Blog</p>
+                <p className="banner-logo">Snake Pit</p>
             </div>
             </Link>
             <HeaderNav user={this.state.user} />
