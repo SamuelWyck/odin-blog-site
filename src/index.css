@@ -15,6 +15,26 @@ html {
   --text-black: hsl(0, 0%, 5%);
 }
 
+.loading-wrapper {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin: 5rem 0;
+}
+
+.loading {
+  color: var(--text-white);
+  font-size: 1.9rem;
+  font-weight: bold;
+  background-color: var(--primary-color);
+  align-self: start;
+  padding: .5rem 1rem;
+  border-radius: 0 20px 0 20px;
+  box-shadow: 0px 0px 15px -2px white;
+}
+
+
+
 @media screen and (width <= 450px) {
   html {
     font-size: 13px;
