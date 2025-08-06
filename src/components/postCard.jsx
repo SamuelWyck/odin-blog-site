@@ -79,7 +79,7 @@ function PostCard({post, admin}) {
             <p className="post-date">{readableDate(post.createdAt)}</p>
         </div>
         <p className="post-title">{post.title}</p>
-        <p className="post-preview">{post.preview}...</p>
+        <p className="post-preview">{post.preview}</p>
     </article>
     </Link>
     );
